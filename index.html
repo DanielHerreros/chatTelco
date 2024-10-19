@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Preguntas y Evaluador</title>
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <!-- Añadir la biblioteca marked para renderizar Markdown -->
+   
+</head>
+<body>
+    <div class="container">
+        <h1>Generador de Preguntas y Evaluador</h1>
+        
+        <!-- Cambiamos el botón a un enlace para evitar problemas de eventos -->
+        <a href="#" id="openApiKeyDialogBtn">Configurar API Key</a>
+
+        <div class="question-section">
+            <h2>Generar Pregunta</h2>
+            <select id="questionType">
+                <option value="matemáticas">Matemáticas</option>
+                <option value="ciencias">Ciencias</option>
+                <option value="historia">Historia</option>
+                <option value="literatura">Literatura</option>
+            </select>
+            <select id="questionFormat">
+                <option value="test">Test</option>
+                <option value="desarrollo">Desarrollo</option>
+                <option value="desmentir">Desmentir Afirmación</option>
+            </select>
+            <select id="difficultyLevel">
+                <option value="fácil">Fácil</option>
+                <option value="medio">Medio</option>
+                <option value="difícil">Difícil</option>
+            </select>
+            <select id="educationLevel">
+                <option value="primaria">Primaria</option>
+                <option value="secundaria">Secundaria</option>
+                <option value="universitario">Universitario</option>
+            </select>
+            <button id="generateBtn">Generar Pregunta</button>
+            <div id="questionDisplay" class="result-box markdown-content"></div>
+        </div>
+
+        <div class="answer-section">
+            <h2>Tu Respuesta</h2>
+            <textarea id="answerInput" rows="4" placeholder="Escribe tu respuesta aquí..."></textarea>
+            <button id="evaluateBtn">Evaluar Respuesta</button>
+            <div id="evaluationDisplay" class="result-box markdown-content"></div>
+        </div>
+
+        <!-- Reemplazamos el div por un dialog -->
+        <dialog id="apiKeyDialog" class="modal">
+            <div class="modal-content">
+                <h2>Establecer API Key</h2>
+                <input type="text" id="apiKeyInput" placeholder="Introduce tu API Key" />
+                <div class="button-group">
+                    <button id="setApiKeyBtn">Establecer API Key</button>
+                    <button id="clearApiKeyBtn">Limpiar API Key</button>
+                    <button id="closeDialogBtn">Cerrar</button>
+                </div>
+            </div>
+        </dialog>
+
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
