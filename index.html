@@ -33,6 +33,54 @@
             background-color: #FF7F00;
             transform: scale(1.1);
         }
+
+        /* Nuevos estilos para el botón de modo oscuro */
+        #darkModeBtn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 99;
+            font-size: 24px;
+            border: none;
+            outline: none;
+            background-color: #333;
+            color: white;
+            cursor: pointer;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        #darkModeBtn:hover {
+            background-color: #555;
+            transform: scale(1.1);
+        }
+
+        /* Estilos para el modo oscuro */
+        body.dark-mode {
+            background-color: #222;
+            color: #fff;
+        }
+
+        .dark-mode .container {
+            background-color: #333;
+        }
+
+        .dark-mode select, .dark-mode textarea, .dark-mode input {
+            background-color: #444;
+            color: #fff;
+            border-color: #555;
+        }
+
+        .dark-mode button {
+            background-color: #555;
+            color: #fff;
+        }
     </style>
 </head>
 <body>
@@ -80,6 +128,9 @@
         <!-- Agregar el botón flotante para volver arriba -->
         <button id="scrollToTopBtn" title="Ir arriba">↑</button>
 
+        <!-- Agregar el botón flotante para cambiar a modo oscuro -->
+        <button id="darkModeBtn" title="Cambiar modo">🌓</button>
+
     </div>
 
     <script type="module" src="/src/main.ts"></script>
@@ -101,6 +152,24 @@
                 top: 0,
                 behavior: 'smooth'
             });
+        };
+
+        // Nuevo código para el botón de modo oscuro
+        const darkModeBtn = document.getElementById("darkModeBtn");
+        const body = document.body;
+
+        // Verificar si el modo oscuro está guardado en localStorage
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            body.classList.add('dark-mode');
+        }
+
+        darkModeBtn.onclick = function() {
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                localStorage.setItem('darkMode', null);
+            }
         };
     </script>
 </body>
