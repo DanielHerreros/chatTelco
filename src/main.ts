@@ -75,7 +75,7 @@ companySelect.addEventListener('change', async () => {
     // Generar preguntas relevantes para la compañía seleccionada
     const examChain = createExamChain(groqApiKey);
     const questionResponse = await examChain.invoke(questionData);
-    const responseString = await questionResponse; // Asegurarse de que sea un string
+    const responseString = questionResponse; // Asegurarse de que sea un string
     questionDisplay.innerHTML = await marked(responseString); // Aplicar marked aquí
 });
 
