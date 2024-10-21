@@ -21,10 +21,10 @@ export const createEvaluationChain = (groq_api_key: string) => {
 
   const chatPrompt = ChatPromptTemplate.fromMessages<{ question: string; answer: string; format: string; difficulty: string; level: string }>([
     ["system", template],
-    ["user", "Evalúa la respuesta a la pregunta: {question}\n\nRespuesta del estudiante: {answer}\n\nFormato de pregunta: {format}\n\nDificultad: {difficulty}\n\nNivel educativo: {level}"],
+    ["user", "Saca una evaluación de la respuesta del estudiante a la pregunta dada."],
   ]);
 
   const parser = new StringOutputParser();
-
   return chatPrompt.pipe(llm).pipe(parser);
 };
+

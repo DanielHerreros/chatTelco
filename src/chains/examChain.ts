@@ -8,25 +8,24 @@ export const createExamChain = (groq_api_key: string) => {
     model: "llama-3.1-8b-instant",
   });
 
-  const template = `Genera una pregunta {type} sobre un tema aleatorio para evaluar a un estudiante de nivel {level}. 
-  La pregunta debe ser de dificultad {difficulty}.
-  Utiliza formato Markdown para estructurar la pregunta.
+  const template = `Responde a la siguiente pregunta del cliente sobre los servicios de la compañía: {company}. 
+  Si la pregunta es frecuente, proporciona información detallada. 
+  Si es una pregunta nueva, intenta dar la mejor respuesta posible.
 
-  Tipo de pregunta: {type}
-  Formato: {format}
-  Dificultad: {difficulty}
-  Nivel educativo: {level}
+  Pregunta del cliente: {customerQuestion}
+  Compañía: {company}
 
-  Pregunta (en Markdown):
-  No respondas nada, solo genera la pregunta.
+  Respuesta (en Markdown):
   `;
+// ... existing code ...;
 
   const chatPrompt = ChatPromptTemplate.fromMessages<{ type: string, format: string, difficulty: string, level: string }>([
     ["system", template],
-    ["user", "Genera una pregunta del tipo {type} en formato {format} de dificultad {difficulty} para nivel {level} usando Markdown"],
+    ["user", "Genera una preguntas frecuentes sobre los servicios de la compañía seleccionada: {company} usando Markdown"],
   ]);
 
   const parser = new StringOutputParser();
 
   return chatPrompt.pipe(llm).pipe(parser);
 };
+

@@ -10,43 +10,28 @@
 </head>
 <body>
     <div class="container">
-        <h1>Generador de Preguntas y Evaluador</h1>
+        <h1>Asistente de Telefonia</h1>
         
         <!-- Cambiamos el botón a un enlace para evitar problemas de eventos -->
         <a href="#" id="openApiKeyDialogBtn">Configurar API Key</a>
 
         <div class="question-section">
-            <h2>Generar Pregunta</h2>
-            <select id="questionType">
-                <option value="matemáticas">Matemáticas</option>
-                <option value="ciencias">Ciencias</option>
-                <option value="historia">Historia</option>
-                <option value="literatura">Literatura</option>
+            <h2>Elige tu compañia</h2>
+            <select id="companySelect">
+                <option value="CompanyA">Compañía A</option>
+                <option value="CompanyB">Compañía B</option>
+                <!-- Agrega más compañías según sea necesario -->
             </select>
-            <select id="questionFormat">
-                <option value="test">Test</option>
-                <option value="desarrollo">Desarrollo</option>
-                <option value="desmentir">Desmentir Afirmación</option>
-            </select>
-            <select id="difficultyLevel">
-                <option value="fácil">Fácil</option>
-                <option value="medio">Medio</option>
-                <option value="difícil">Difícil</option>
-            </select>
-            <select id="educationLevel">
-                <option value="primaria">Primaria</option>
-                <option value="secundaria">Secundaria</option>
-                <option value="universitario">Universitario</option>
-            </select>
-            <button id="generateBtn">Generar Pregunta</button>
-            <div id="questionDisplay" class="result-box markdown-content"></div>
+ 
+            <button id="generateBtn">Generar Respuesta</button>
+            <div id="questionDisplay"></div>
         </div>
 
         <div class="answer-section">
             <h2>Tu Respuesta</h2>
-            <textarea id="answerInput" rows="4" placeholder="Escribe tu respuesta aquí..."></textarea>
-            <button id="evaluateBtn">Evaluar Respuesta</button>
-            <div id="evaluationDisplay" class="result-box markdown-content"></div>
+            <textarea id="answerInput" placeholder="Escribe tu pregunta aquí..."></textarea>
+            
+            
         </div>
 
         <!-- Reemplazamos el div por un dialog -->

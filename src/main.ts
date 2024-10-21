@@ -18,7 +18,8 @@ const questionType = document.getElementById('questionType') as HTMLSelectElemen
 const questionFormat = document.getElementById('questionFormat') as HTMLSelectElement;
 const difficultyLevel = document.getElementById('difficultyLevel') as HTMLSelectElement;
 const educationLevel = document.getElementById('educationLevel') as HTMLSelectElement;
-const answerInput = document.getElementById('answerInput') as HTMLTextAreaElement;
+const answerInput = document.getElementById('answerInput') as HTMLTextAreaElement; // Campo para la pregunta del cliente
+const companySelect = document.getElementById('companySelect') as HTMLSelectElement; // Selección de compañía
 
 // Variables globales
 let groqApiKey = localStorage.getItem('groqApiKey') || '';
@@ -59,16 +60,38 @@ clearApiKeyBtn.addEventListener('click', () => {
     alert('API Key limpiada.');
 });
 
-// Funciones principales
-async function generateQuestion() {
+// Event listener para manejar la selección de la compañía
+companySelect.addEventListener('change', async () => {
+    const selectedCompany = companySelect.value;
     const questionData = {
+        company: selectedCompany,
+        customerQuestion: '', // Inicialmente vacío
         type: questionType.value,
         format: questionFormat.value,
         difficulty: difficultyLevel.value,
         level: educationLevel.value,
     };
-    const examChain = createExamChain(groqApiKey);
     
+    // Generar preguntas relevantes para la compañía seleccionada
+    const examChain = createExamChain(groqApiKey);
+    const questionResponse = await examChain.invoke(questionData);
+    const responseString = await questionResponse; // Asegurarse de que sea un string
+    questionDisplay.innerHTML = await marked(responseString); // Aplicar marked aquí
+});
+
+// Modificar la función generateQuestion para incluir la pregunta del cliente
+async function generateQuestion() {
+    const customerQuestion = answerInput.value; // Obtener la pregunta del cliente
+    const questionData = {
+        company: companySelect.value, // Compañía seleccionada
+        customerQuestion: customerQuestion, // Pregunta del cliente
+        type: 'frequent', // Tipo de pregunta, puedes ajustarlo según sea necesario
+        format: 'markdown', // Formato de respuesta
+        difficulty: 'easy', // Dificultad, ajusta según sea necesario
+        level: 'basic', // Nivel de servicio, ajusta según sea necesario
+    };
+    
+    const examChain = createExamChain(groqApiKey);
     const questionResponse = await examChain.invoke(questionData);
     const responseString = await questionResponse; // Asegurarse de que sea un string
     questionDisplay.innerHTML = await marked(responseString); // Aplicar marked aquí
@@ -81,6 +104,7 @@ async function evaluateAnswer() {
         format: questionFormat.value,
         difficulty: difficultyLevel.value,
         level: educationLevel.value,
+        company: 'Compañía seleccionada', // Añadir la compañía seleccionada
     };
     const evaluationChain = createEvaluationChain(groqApiKey);
 
