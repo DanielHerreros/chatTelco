@@ -18,5 +18,9 @@
     "@langchain/groq": "^0.1.2",
     "marked": "^14.1.2"
   },
-  "module": "index.ts"
+  "module": "index.ts",
+  "description": "Importante:\r - Tener una API Key de Groq",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC"
 }

@@ -3,10 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generador de Preguntas y Evaluador</title>
+    <title>Ch</title>
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <!-- Añadir la biblioteca marked para renderizar Markdown -->
-   
+    <style>
+        #scrollToTopBtn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 99;
+            font-size: 24px;
+            border: none;
+            outline: none;
+            background-color: #FF8C00;
+            color: white;
+            cursor: pointer;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        #scrollToTopBtn:hover {
+            background-color: #FF7F00;
+            transform: scale(1.1);
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -24,17 +51,18 @@
                 <option value="simyo">Simyo</option>
                 <!-- Agrega más compañías según sea necesario -->
             </select>
- 
+            <div class="answer-section">
+                <h2>Si no encuentras la respuesta que buscas, escribe tu pregunta aquí...</h2>
+                <textarea id="answerInput" placeholder="Escribe tu pregunta aquí..."></textarea>
+                
+                
+            </div>
             <button id="generateBtn">Generar Respuesta</button>
+           
             <div id="questionDisplay"></div>
         </div>
 
-        <div class="answer-section">
-            <h2>Si no encuentras la respuesta que buscas, escribe tu pregunta aquí...</h2>
-            <textarea id="answerInput" placeholder="Escribe tu pregunta aquí..."></textarea>
-            
-            
-        </div>
+
 
         <!-- Reemplazamos el div por un dialog -->
         <dialog id="apiKeyDialog" class="modal">
@@ -49,8 +77,31 @@
             </div>
         </dialog>
 
+        <!-- Agregar el botón flotante para volver arriba -->
+        <button id="scrollToTopBtn" title="Ir arriba">↑</button>
+
     </div>
 
     <script type="module" src="/src/main.ts"></script>
+    <script>
+        const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+
+        // Función para mostrar u ocultar el botón
+        window.onscroll = function() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                scrollToTopBtn.style.display = "flex";
+            } else {
+                scrollToTopBtn.style.display = "none";
+            }
+        };
+
+        // Función para volver arriba cuando se hace clic en el botón
+        scrollToTopBtn.onclick = function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        };
+    </script>
 </body>
 </html>
